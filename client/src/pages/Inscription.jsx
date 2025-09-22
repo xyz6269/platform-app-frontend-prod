@@ -131,7 +131,7 @@ const InscriptionPage = () => {
     };
 
     try {
-      const response = await axios.post(`https://app-in-science.cc/api/v1/auth/signin`, backendPayload);
+      const response = await axios.post(`https://app-in-science.cc/api/v1/auth/signup`, backendPayload);
 
       if (response.status === 201) {
         setIsSubmitted(true);

@@ -49,7 +49,7 @@ const LoginPage = () => {
 
 
     try {
-      const response = await axios.post(`https://app-in-science.cc/api/v1/auth/signup`, formData);
+      const response = await axios.post(`https://app-in-science.cc/api/v1/auth/signin`, formData);
 
       const data = response.data;
 
