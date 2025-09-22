@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-import axios from 'axios'; // Import axios
-import { Mail, Lock, Loader2, CheckCircle, MessageCircle } from "lucide-react";
+import axios from 'axios';
+import { Mail, Lock, Loader2, CheckCircle } from "lucide-react";
 import { useNavigate } from 'react-router-dom';
-
-// Note: You must install axios first: npm install axios
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({
@@ -13,6 +11,7 @@ const LoginPage = () => {
 
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [notification, setNotification] = useState(""); // New notification state
   const navigate = useNavigate();
 
   const handleInputChange = (e) => {
@@ -27,15 +26,10 @@ const LoginPage = () => {
   const validateForm = () => {
     const newErrors = {};
 
-    if (!formData.email.trim()) {
-      newErrors.email = "L'email est requis";
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = "Format d'email invalide";
-    }
+    if (!formData.email.trim()) newErrors.email = "L'email est requis";
+    else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = "Format d'email invalide";
 
-    if (!formData.password.trim()) {
-      newErrors.password = "Le mot de passe est requis";
-    }
+    if (!formData.password.trim()) newErrors.password = "Le mot de passe est requis";
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -46,11 +40,10 @@ const LoginPage = () => {
     if (!validateForm()) return;
 
     setIsSubmitting(true);
-
+    setNotification(""); // clear previous notification
 
     try {
       const response = await axios.post(`https://app-in-science.cc/api/v1/auth/signin`, formData);
-
       const data = response.data;
 
       if (data.token) {
@@ -60,7 +53,8 @@ const LoginPage = () => {
           console.error("Could not set item in localStorage", e);
         }
 
-        navigate('/members');
+        // Show notification instead of immediately navigating
+        setNotification("✅ Vous êtes authentifié ! Nous examinerons votre demande pour rejoindre le club.");
       } else {
         setErrors({ general: "Réponse du serveur inattendue." });
       }
@@ -82,17 +76,8 @@ const LoginPage = () => {
 
   return (
       <div className="min-h-screen bg-gradient-to-br from-cyber-dark via-cyber-darker to-cyber-darkest flex items-center justify-center px-4 relative">
-        {/* Background Effects */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-24 left-16 w-32 h-32 border border-purple-400/20 rounded-full animate-pulse"></div>
-          <div className="absolute bottom-24 right-20 w-40 h-40 border-2 border-cyber-blue/15 rotate-45 animate-spin-slow"></div>
-        </div>
-
         <div className="max-w-md w-full relative z-10 mt-10 mb-10">
           <div className="text-center mb-8">
-          <span className="font-fira text-sm text-purple-400 bg-purple-400/10 px-4 py-2 rounded-full border border-purple-400/30">
-            [LOGIN_PROTOCOL]
-          </span>
             <h1 className="font-orbitron text-4xl font-bold mt-4 mb-2 bg-gradient-to-r from-purple-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent">
               CONNEXION SÉCURISÉE
             </h1>
@@ -101,13 +86,16 @@ const LoginPage = () => {
             </p>
           </div>
 
-          <form
-              onSubmit={handleSubmit}
-              className="bg-black/40 border border-cyber-blue/20 rounded-2xl p-8 backdrop-blur-sm space-y-6"
-          >
+          <form onSubmit={handleSubmit} className="bg-black/40 border border-cyber-blue/20 rounded-2xl p-8 backdrop-blur-sm space-y-6">
             {errors.general && (
                 <div className="bg-red-500/10 border border-red-400/30 text-red-400 p-3 rounded-lg font-rajdhani text-sm">
                   {errors.general}
+                </div>
+            )}
+
+            {notification && (
+                <div className="bg-green-500/10 border border-green-400/30 text-green-400 p-3 rounded-lg font-rajdhani text-sm">
+                  {notification}
                 </div>
             )}
 
@@ -129,11 +117,7 @@ const LoginPage = () => {
                     }`}
                 />
               </div>
-              {errors.email && (
-                  <span className="text-red-400 text-sm font-rajdhani mt-1 block">
-                {errors.email}
-              </span>
-              )}
+              {errors.email && <span className="text-red-400 text-sm font-rajdhani mt-1 block">{errors.email}</span>}
             </div>
 
             {/* Password */}
@@ -154,11 +138,7 @@ const LoginPage = () => {
                     }`}
                 />
               </div>
-              {errors.password && (
-                  <span className="text-red-400 text-sm font-rajdhani mt-1 block">
-                {errors.password}
-              </span>
-              )}
+              {errors.password && <span className="text-red-400 text-sm font-rajdhani mt-1 block">{errors.password}</span>}
             </div>
 
             {/* Submit */}
@@ -184,32 +164,6 @@ const LoginPage = () => {
               </a>
             </p>
           </form>
-          {/* Info Panel */}
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-black/30 border border-cyber-blue/20 rounded-lg p-6">
-              <Mail className="w-8 h-8 text-cyber-blue mb-3" />
-              <h4 className="font-orbitron font-semibold text-cyber-blue mb-2">Confirmation Email</h4>
-              <p className="font-rajdhani text-gray-300 text-sm">
-                Vérifiez votre boîte mail après l'inscription
-              </p>
-            </div>
-
-            <div className="bg-black/30 border border-purple-400/20 rounded-lg p-6">
-              <MessageCircle className="w-8 h-8 text-green-400 mb-3" />
-              <h4 className="font-orbitron font-semibold text-green-400 mb-2">WhatsApp Group</h4>
-              <p className="font-rajdhani text-gray-300 text-sm">
-                QR code inclus dans l'email de confirmation
-              </p>
-            </div>
-
-            <div className="bg-black/30 border border-green-400/20 rounded-lg p-6">
-              <CheckCircle className="w-8 h-8 text-yellow-400 mb-3" />
-              <h4 className="font-orbitron font-semibold text-yellow-400 mb-2">Contact Équipe</h4>
-              <p className="font-rajdhani text-gray-300 text-sm">
-                Suivi personnalisé sous 48h maximum
-              </p>
-            </div>
-          </div>
         </div>
       </div>
   );
