@@ -1,5 +1,5 @@
 # ---- Build Stage ----
-FROM node:20 AS build
+FROM node:20-alpine AS build
 WORKDIR /app
 
 # Install dependencies
@@ -14,8 +14,11 @@ RUN npm run build
 FROM nginx:alpine
 WORKDIR /usr/share/nginx/html
 
-# Copy build artifacts
-COPY --from=build /app/dist ./
+# Copy the custom NGINX configuration
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# Copy build artifacts from the build stage
+COPY --from=build /app/build ./
 
 # Expose nginx port
 EXPOSE 80
