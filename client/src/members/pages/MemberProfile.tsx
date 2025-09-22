@@ -1,247 +1,164 @@
-import { Button } from "../components/ui/button";
-import { Badge } from "../components/ui/badge";
-import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
-import { 
-  User, 
-  Mail, 
-  Phone, 
-  GraduationCap, 
-  Calendar, 
-  Award, 
-  FolderKanban,
-  Edit
-} from "lucide-react";
-
 import { useEffect, useState } from "react";
-import { getCurrentUser, UserProfile } from "../../lib/api";
-import { login, logout } from "../../lib/api";
+import {
+  User,
+  Mail,
+  Phone,
+  GraduationCap,
+  Loader2,
+  UserCheck
+} from "lucide-react";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle
+} from "../components/ui/card";
+import { Button } from "../components/ui/button";
+
+// Using the correct type definitions
+import { login, logout, getCurrentUser, LoginDTO, CurrentUserResponse } from "../../lib/api";
+
+// This is the correct, simple user profile based on the '/me' endpoint
+// Since the API returns a string, we will assume it is the user's email for the UI.
+interface SimpleUserProfile {
+  email: string;
+}
 
 const MemberProfile = () => {
-  const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
+  const [userProfile, setUserProfile] = useState<SimpleUserProfile | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // local fallback until API responds
-  const fallback: UserProfile = {
-    fullName: "John Doe",
-    username: "johndoe",
-    yearOfStudy: "Year 3",
-    email: "john.doe@university.edu",
-    phone: "+1 (555) 123-4567",
-    projectsParticipated: [
-      { id: 1, name: "AI Chatbot", role: "Frontend Developer", status: "Completed" },
-      { id: 2, name: "Web Portfolio", role: "Full Stack", status: "Ongoing" },
-      { id: 3, name: "Mobile App", role: "UI/UX Designer", status: "Completed" }
-    ],
-    eventsAttended: [
-      { id: 1, name: "Tech Conference 2024", date: "Mar 15, 2024" },
-      { id: 2, name: "Hackathon Spring", date: "Feb 20, 2024" },
-      { id: 3, name: "AI Workshop Series", date: "Jan 10, 2024" }
-    ],
-    achievements: [
-      { id: 1, name: "Project Leader", description: "Led 3+ successful projects", icon: "🏆" },
-      { id: 2, name: "Team Player", description: "Collaborated on 10+ projects", icon: "🤝" },
-      { id: 3, name: "Innovation Award", description: "Best innovative solution 2024", icon: "💡" },
-      { id: 4, name: "Code Master", description: "Contributed 50+ commits", icon: "💻" }
-    ]
-  };
+  // Use a state variable to handle login form data
+  const [loginForm, setLoginForm] = useState<LoginDTO>({ email: '', password: '' });
 
+  // Handle fetching the user on component mount
   useEffect(() => {
     let cancelled = false;
-    setLoading(true);
-    getCurrentUser()
-      .then((u) => {
-        if (!cancelled) setUserProfile(u);
-      })
-      .catch((err) => {
-        console.error(err);
-        if (!cancelled) setError(String(err));
-      })
-      .finally(() => {
-        if (!cancelled) setLoading(false);
-      });
+    const fetchUser = async () => {
+      setLoading(true);
+      try {
+        const response = await getCurrentUser();
+        // Assuming the string response is a single piece of user data, like an email.
+        if (!cancelled) {
+          setUserProfile({ email: response });
+        }
+      } catch (err) {
+        console.error("Failed to fetch user:", err);
+        if (!cancelled) {
+          setError("Failed to load user profile. Please log in.");
+        }
+      } finally {
+        if (!cancelled) {
+          setLoading(false);
+        }
+      }
+    };
+
+    fetchUser();
 
     return () => {
       cancelled = true;
     };
   }, []);
 
-  const profile = userProfile ?? fallback;
+  // Login handler
+  const handleLogin = async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const { token } = await login(loginForm);
+      // The API returns a token, but the `/me` endpoint returns a string.
+      // We'll immediately fetch the user data after login.
+      const userEmail = await getCurrentUser();
+      setUserProfile({ email: userEmail });
+      console.log('Login successful! Token:', token);
+    } catch (e) {
+      console.error(e);
+      setError("Login failed. Check your credentials.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
-  return (
-    <div className="space-y-8">
-      {loading && (
-        <div className="p-4 rounded bg-muted/40 text-center">Loading profile...</div>
-      )}
-      {error && (
-        <div className="p-4 rounded bg-destructive/10 text-destructive">Failed to load profile: {error}</div>
-      )}
-      <div className="flex space-x-2">
-        <button
-          onClick={async () => {
-            const user = prompt('username', 'janedoe');
-            const pass = prompt('password', 'password');
-            if (user && pass) {
-              try {
-                await login(user, pass);
-                setLoading(true);
-                const u = await getCurrentUser();
-                setUserProfile(u);
-                setError(null);
-              } catch (e) {
-                setError(String(e));
-              } finally {
-                setLoading(false);
-              }
-            }
-          }}
-          className="px-3 py-1 btn"
-        >
-          Login
-        </button>
-        <button
-          onClick={() => {
-            logout();
-            setUserProfile(null);
-          }}
-          className="px-3 py-1 btn"
-        >
-          Logout
-        </button>
-      </div>
-      {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold font-orbitron bg-gradient-primary bg-clip-text text-transparent">
-            Member Profile
-          </h1>
-          <p className="text-muted-foreground mt-1 font-jetbrains">
-            Manage your club profile and achievements
-          </p>
+  // Logout handler
+  const handleLogout = async () => {
+    // Note: The `logout` function in your `api.d.ts` is `void`, so it's a local action.
+    // If you need a backend call, you'd implement it here.
+    logout();
+    setUserProfile(null);
+    setError(null);
+  };
+
+  if (loading) {
+    return (
+        <div className="flex justify-center items-center h-screen text-lg">
+          <Loader2 className="w-8 h-8 mr-2 animate-spin" /> Loading...
         </div>
-        <Button className="bg-gradient-primary text-primary-foreground hover:opacity-90 font-jetbrains">
-          <Edit className="w-4 h-4 mr-2" />
-          Edit Profile
-        </Button>
-      </div>
+    );
+  }
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* Profile Information */}
-        <div className="lg:col-span-1">
-          <Card className="card-elevated border border-primary/20">
-      <CardHeader className="text-center">
-              <div className="mx-auto w-24 h-24 bg-gradient-primary rounded-full flex items-center justify-center mb-4 animate-pulse-glow">
-                <User className="w-12 h-12 text-primary-foreground" />
-              </div>
-      <CardTitle className="font-orbitron">{profile.fullName}</CardTitle>
-      <p className="text-muted-foreground font-jetbrains">@{profile.username}</p>
+  if (userProfile) {
+    // Render the profile for a logged-in user
+    return (
+        <div className="space-y-8 p-8">
+          <div className="flex justify-between items-center">
+            <h1 className="text-3xl font-bold">Welcome back!</h1>
+            <Button onClick={handleLogout} className="bg-red-500 hover:bg-red-600">
+              Logout
+            </Button>
+          </div>
+          <Card>
+            <CardHeader>
+              <CardTitle>User Profile</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="space-y-3">
-                <div className="flex items-center space-x-3 p-3 rounded-lg bg-muted/50">
-                  <GraduationCap className="w-5 h-5 text-primary" />
-                  <div>
-        <p className="text-sm font-medium">{profile.yearOfStudy}</p>
-                    <p className="text-xs text-muted-foreground">Computer Science</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-center space-x-3 p-3 rounded-lg bg-muted/50">
-                  <Mail className="w-5 h-5 text-primary" />
-                  <div>
-        <p className="text-sm font-medium font-jetbrains">{profile.email}</p>
-                    <p className="text-xs text-muted-foreground">Primary email</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-center space-x-3 p-3 rounded-lg bg-muted/50">
-                  <Phone className="w-5 h-5 text-primary" />
-                  <div>
-        <p className="text-sm font-medium font-jetbrains">{profile.phone}</p>
-                    <p className="text-xs text-muted-foreground">Mobile number</p>
-                  </div>
-                </div>
+              <div className="flex items-center space-x-3">
+                <UserCheck className="w-5 h-5" />
+                <p>You are logged in with the email: **{userProfile.email}**</p>
               </div>
+              {/* Displaying other profile info is not possible with the current API */}
             </CardContent>
           </Card>
         </div>
+    );
+  }
 
-        {/* Main Content */}
-        <div className="lg:col-span-2 space-y-6">
-          {/* Projects Participated */}
-          <Card className="card-elevated border border-primary/20">
-            <CardHeader>
-              <CardTitle className="flex items-center space-x-2 font-orbitron">
-                <FolderKanban className="w-5 h-5 text-primary" />
-                <span>Projects Participated</span>
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-3">
-                {(profile.projectsParticipated ?? []).map((project) => (
-                  <div key={project.id} className="flex items-center justify-between p-4 rounded-lg bg-gradient-card border border-border/50 hover:border-primary/30 transition-all">
-                    <div>
-                      <h3 className="font-medium font-orbitron">{project.name}</h3>
-                      <p className="text-sm text-muted-foreground font-jetbrains">{project.role}</p>
-                    </div>
-                    <Badge variant={project.status === 'Completed' ? 'default' : 'secondary'} className="font-jetbrains">
-                      {project.status}
-                    </Badge>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Events Attended */}
-          <Card className="card-elevated border border-primary/20">
-            <CardHeader>
-              <CardTitle className="flex items-center space-x-2 font-orbitron">
-                <Calendar className="w-5 h-5 text-primary" />
-                <span>Events Attended</span>
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-3">
-                {(profile.eventsAttended ?? []).map((event) => (
-                  <div key={event.id} className="flex items-center justify-between p-4 rounded-lg bg-gradient-card border border-border/50 hover:border-primary/30 transition-all">
-                    <div>
-                      <h3 className="font-medium font-orbitron">{event.name}</h3>
-                      <p className="text-sm text-muted-foreground font-jetbrains">{event.date}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Achievements & Badges */}
-          <Card className="card-elevated border border-primary/20">
-            <CardHeader>
-              <CardTitle className="flex items-center space-x-2 font-orbitron">
-                <Award className="w-5 h-5 text-primary" />
-                <span>Achievements & Badges</span>
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {(profile.achievements ?? []).map((achievement) => (
-                  <div key={achievement.id} className="p-4 rounded-lg bg-gradient-accent/10 border border-accent/20 hover:border-accent/40 transition-all animate-pulse-glow">
-                    <div className="flex items-start space-x-3">
-                      <span className="text-2xl">{achievement.icon}</span>
-                      <div>
-                        <h3 className="font-medium font-orbitron">{achievement.name}</h3>
-                        <p className="text-sm text-muted-foreground font-jetbrains">{achievement.description}</p>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-        </div>
+  // Render the login form for a logged-out user
+  return (
+      <div className="flex flex-col items-center justify-center min-h-screen p-8">
+        <Card className="w-full max-w-sm">
+          <CardHeader>
+            <CardTitle className="text-2xl">Login</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            {error && <p className="text-red-500 text-sm">{error}</p>}
+            <div className="space-y-2">
+              <label className="text-sm font-medium">Email</label>
+              <input
+                  type="email"
+                  value={loginForm.email}
+                  onChange={(e) => setLoginForm({ ...loginForm, email: e.target.value })}
+                  className="w-full p-2 border rounded"
+                  placeholder="user@example.com"
+              />
+            </div>
+            <div className="space-y-2">
+              <label className="text-sm font-medium">Password</label>
+              <input
+                  type="password"
+                  value={loginForm.password}
+                  onChange={(e) => setLoginForm({ ...loginForm, password: e.target.value })}
+                  className="w-full p-2 border rounded"
+                  placeholder="••••••••"
+              />
+            </div>
+            <Button onClick={handleLogin} disabled={loading} className="w-full">
+              {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : 'Log In'}
+            </Button>
+          </CardContent>
+        </Card>
       </div>
-    </div>
   );
 };
 
