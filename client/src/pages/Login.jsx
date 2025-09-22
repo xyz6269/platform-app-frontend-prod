@@ -47,11 +47,9 @@ const LoginPage = () => {
 
     setIsSubmitting(true);
 
-    // Use the environment variable for the API URL
-    const API_URL = process.env.REACT_APP_API_URL_AUTH_SERVICE;
 
     try {
-      const response = await axios.post(`${API_URL}/api/v1/auth/signin`, formData);
+      const response = await axios.post(`https://app-in-science.cc/api/v1/auth/signup`, formData);
 
       const data = response.data;
 
