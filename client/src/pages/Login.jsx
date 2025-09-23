@@ -43,7 +43,7 @@ const LoginPage = () => {
     setNotification(""); // clear previous notification
 
     try {
-      const response = await axios.post(`https://app-in-science.cc/api/v1/auth/signin`, formData);
+      const response = await axios.post(`https://app-in-science.cc/api/v1/auth/authenticate`, formData);
       const data = response.data;
 
       if (data.token) {
