@@ -25,9 +25,9 @@ const InscriptionPage = () => {
   // Removed unnecessary data lists as they are not part of the API payload
   const majors = [
     { value: 'ISIC', label: 'Ingénierie des systèmes d\'information et de communication (ISIC)' },
-    { value: 'G2E', label: 'Génie Energétique et Electrique (G2E)' },
+    { value: 'GEE', label: 'Génie Energétique et Electrique (G2E)' },
     { value: 'GI', label: 'Génie Industriel (GI)' },
-    { value: '2ITE', label: 'Ingénierie Informatique et Technologies émergentes (2ITE)' },
+    { value: 'IITE', label: 'Ingénierie Informatique et Technologies émergentes (2ITE)' },
     { value: 'GC', label: 'Génie Civil (GC)' },
     { value: 'CCN', label: 'Cybersécurité et Confiance Numérique (CCN)' },
     { value: 'SDIA', label: 'Master Intelligence Artificielle (SDIA)' },
