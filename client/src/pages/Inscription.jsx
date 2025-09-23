@@ -86,7 +86,6 @@ const InscriptionPage = () => {
 
     setIsSubmitting(true);
 
-
     const backendPayload = {
       email: formData.email,
       firstName: formData.firstName,
@@ -100,13 +99,15 @@ const InscriptionPage = () => {
     };
 
     try {
-      const response = await axios.post(`https://app-in-science.cc/api/v1/auth/signup`, backendPayload);
+      const response = await axios.post(` https://app-in-science.cc/api/v1/auth/signup`, backendPayload);
 
+      // Accept any 2xx status
       if (response.status >= 200 && response.status < 300) {
         setIsSubmitted(true);
       } else {
         setErrors({ general: response.data?.message || "Erreur lors de l'inscription." });
       }
+
     } catch (error) {
       if (error.response) {
         setErrors({ general: error.response.data.message || "Erreur lors de l'inscription." });
@@ -138,10 +139,11 @@ const InscriptionPage = () => {
     setErrors({});
   };
 
+  // === Confirmation / “We’ll review” page ===
   if (isSubmitted) {
     return (
-        <div className="min-h-screen bg-gradient-to-br from-cyber-dark via-cyber-darker to-cyber-darkest flex items-center justify-center px-4">
-          <div className="max-w-2xl w-full text-center">
+        <div className="min-h-screen bg-gradient-to-br from-cyber-dark via-cyber-darker to-cyber-darkest flex items-center justify-center px-4 relative">
+          <div className="max-w-2xl w-full text-center relative z-10">
             <div className="bg-black/40 border border-green-400/30 rounded-2xl p-12 backdrop-blur-sm">
               <div className="mb-8">
                 <CheckCircle className="w-20 h-20 text-green-400 mx-auto mb-4 animate-pulse" />
@@ -185,18 +187,33 @@ const InscriptionPage = () => {
     );
   }
 
-  // Default form rendering
+  // === Default Form ===
   return (
-      <div className="min-h-screen bg-gradient-to-br from-cyber-dark via-cyber-darker to-cyber-darkest flex items-center justify-center px-4">
-        <div className="max-w-2xl w-full">
+      <div className="min-h-screen bg-gradient-to-br from-cyber-dark via-cyber-darker to-cyber-darkest flex items-center justify-center px-4 relative">
+        {/* Background effects */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-24 left-16 w-32 h-32 border border-purple-400/20 rounded-full animate-pulse"></div>
+          <div className="absolute bottom-24 right-20 w-40 h-40 border-2 border-cyber-blue/15 rotate-45 animate-spin-slow"></div>
+        </div>
+
+        <div className="max-w-2xl w-full relative z-10 mt-10 mb-10">
           <form onSubmit={handleSubmit} className="bg-black/40 border border-cyber-blue/20 rounded-2xl p-8 backdrop-blur-sm space-y-6">
             {errors.general && (
                 <div className="bg-red-500/10 border border-red-400/30 text-red-400 p-3 rounded-lg font-rajdhani text-sm">
                   {errors.general}
                 </div>
             )}
-            {/* Render input fields (firstName, lastName, email, phoneNumber, etc.) */}
-            {/* You can reuse your previous input JSX for each field here */}
+            {/* --- You should paste all your previous input fields here --- */}
+            {/* Example: FirstName */}
+            <div>
+              <label className="block font-rajdhani text-gray-300 mb-2">Prénom *</label>
+              <div className="relative">
+                <User className="absolute left-3 top-1/2 -translate-y-1/2 text-cyber-blue w-5 h-5" />
+                <input type="text" name="firstName" value={formData.firstName} onChange={handleInputChange} placeholder="Votre prénom" className="w-full bg-black/30 border border-cyber-blue/30 rounded-lg pl-10 pr-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-cyber-blue/50 transition-all duration-300" />
+              </div>
+            </div>
+            {/* --- repeat for all other fields --- */}
+
             <button type="submit" disabled={isSubmitting} className="w-full bg-gradient-to-r from-cyber-blue to-cyan-400 text-black px-6 py-3 rounded-lg font-rajdhani font-semibold flex items-center justify-center hover:shadow-lg hover:shadow-cyber-blue/30 transition-all duration-300 hover:-translate-y-1 disabled:opacity-50">
               {isSubmitting ? <><Loader2 className="animate-spin w-5 h-5 mr-2" />Inscription...</> : "S'inscrire"}
             </button>
