@@ -1,5 +1,23 @@
 import React, { useRef, useState, useEffect, useCallback } from "react";
 import ScrollIndicator from "../components/ScrollIndicator";
+import ImageSlideshow from "../components/ImageSlideshow";
+import { Mail, Phone, MapPin, MessageCircle, Facebook, Instagram, Music, Linkedin, Github  } from "lucide-react";
+
+
+
+const SocialLinks = ({ social }) => (
+  <div className="flex justify-center space-x-3 mt-4 opacity-0 group-hover:opacity-100 transition-all duration-500">
+    <a href={social.instagram} target="_blank" className="w-8 h-8 rounded-full bg-pink-500 flex items-center justify-center text-white hover:scale-110 transition-all duration-300">
+      <Instagram/>
+    </a>
+    <a href={social.linkedin} target="_blank" className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white hover:scale-110 transition-all duration-300">
+      <Linkedin/>
+    </a>
+    <a href={social.github} target="_blank" className="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center text-white hover:scale-110 transition-all duration-300">
+      <Github/>
+    </a>
+  </div>
+);
 
 const AboutSection = () => {
   const teamScrollRef = useRef(null);
@@ -13,6 +31,9 @@ const AboutSection = () => {
   const [isScrolling, setIsScrolling] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   
+ 
+
+
   // Animation states
   const [isVisible, setIsVisible] = useState({
     leftPanel: false,
@@ -325,14 +346,14 @@ const AboutSection = () => {
           ref={leftPanelRef}
           className={`
             w-full max-w-lg lg:max-w-xl
-            bg-gradient-to-br from-gray-900/95 to-black/95
-            border border-cyber-blue/40
-            rounded-xl overflow-hidden
-            backdrop-blur-lg
-            shadow-2xl shadow-cyber-blue/30
-            transform hover:scale-[1.02] transition-all duration-500
-            hover:shadow-cyber-blue/50
-            hover:border-cyan-400/60
+          bg-gradient-to-br from-gray-900/95 to-black/95
+          border border-cyan-500/40
+          rounded-xl overflow-hidden
+          backdrop-blur-lg
+          shadow-2xl shadow-cyan-500/30
+          transform hover:scale-[1.02] transition-all duration-500
+          hover:shadow-cyan-500/50
+          hover:border-cyan-400/60
             ${isVisible.leftPanel 
               ? 'opacity-100 translate-x-0 translate-y-0' 
               : 'opacity-0 -translate-x-20 translate-y-10'
@@ -347,7 +368,7 @@ const AboutSection = () => {
           <div className="
             flex items-center justify-between
             bg-gradient-to-r from-gray-800/90 to-gray-900/90
-            px-4 py-3 border-b border-cyber-blue/30
+            px-4 py-3 border-b border-cyan-500/30
             backdrop-blur-sm
           ">
             <div className="flex items-center space-x-3">
@@ -356,10 +377,10 @@ const AboutSection = () => {
               <div className="w-3 h-3 rounded-full bg-green-500 animate-pulse shadow-lg shadow-green-500/50" style={{animationDelay: '0.4s'}}></div>
             </div>
             <div className="
-              font-fira text-xs text-cyber-blue
+              font-mono text-xs text-cyan-400
               bg-black/70 px-4 py-2 rounded-md
-              border border-cyber-blue/40
-              shadow-lg shadow-cyber-blue/20
+              border border-cyan-400/40
+              shadow-lg shadow-cyan-400/20
             ">
               &gt; VISUAL_FEED_01.exe
             </div>
@@ -371,42 +392,7 @@ const AboutSection = () => {
           </div>
           
           {/* Enhanced Image Container */}
-          <div className="relative overflow-hidden group">
-            <img 
-              src="about_us.jpg" 
-              alt="AppinSciences Innovation Hub" 
-              className="
-                w-full h-64 md:h-80 lg:h-96
-                object-cover filter
-                transition-all duration-700
-                group-hover:scale-110 group-hover:brightness-110
-                group-hover:contrast-110
-              "
-            />
-            
-            {/* Enhanced Scan Lines */}
-            <div className="
-              absolute inset-0
-              bg-[linear-gradient(transparent_50%,rgba(0,170,255,0.05)_50%)]
-              bg-[size:100%_3px]
-              animate-scan-rotate
-              pointer-events-none
-            "></div>
-            
-            {/* Enhanced Glitch Overlay */}
-            <div className="
-              absolute inset-0
-              bg-gradient-to-r from-transparent via-cyber-blue/15 to-transparent
-              translate-x-full animate-glitch-slide
-              pointer-events-none
-            "></div>
-            
-            {/* Corner accents */}
-            <div className="absolute top-4 left-4 w-8 h-8 border-l-2 border-t-2 border-cyber-blue/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-            <div className="absolute top-4 right-4 w-8 h-8 border-r-2 border-t-2 border-cyan-400/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-            <div className="absolute bottom-4 left-4 w-8 h-8 border-l-2 border-b-2 border-purple-400/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-            <div className="absolute bottom-4 right-4 w-8 h-8 border-r-2 border-b-2 border-pink-400/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-          </div>
+          <ImageSlideshow />
           
           {/* Enhanced Terminal Footer */}
           <div className="
@@ -465,7 +451,7 @@ const AboutSection = () => {
             }
           `}
           style={{
-            transitionDelay: isVisible.rightPanel ? '200ms' : '0ms'
+            transitionDelay: isVisible.rightPanel ? '100ms' : '0ms'
           }}
         >
           {/* Enhanced Panel Frame Effects */}
@@ -517,11 +503,11 @@ const AboutSection = () => {
           <div className="space-y-8">
             {/* Foundation Block */}
             <div className={`
-              bg-black/40 border border-cyber-blue/30
+              bg-black/40 border border-cyan-500/30
               rounded-xl p-6
-              hover:border-cyber-blue/50 hover:bg-black/50
-              transition-all duration-500
-              hover:-translate-y-1 hover:shadow-xl hover:shadow-cyber-blue/20
+              hover:border-cyan-500/50 hover:bg-black/50
+              transition-all duration-300
+              hover:-translate-y-1 hover:shadow-xl hover:shadow-cyan-500/20
               group
               ${isVisible.rightPanel 
                 ? 'opacity-100 translate-y-0' 
@@ -529,18 +515,18 @@ const AboutSection = () => {
               }
             `}
             style={{
-              transitionDelay: isVisible.rightPanel ? '400ms' : '0ms'
+              transitionDelay: isVisible.rightPanel ? '200ms' : '0ms'
             }}>
               <div className="flex items-center justify-between mb-4">
                 <span className="
-                  font-fira text-xs text-yellow-400
+                  font-mono text-xs text-yellow-400
                   bg-yellow-400/10 px-3 py-1 rounded-full
                   border border-yellow-400/30
                 ">
                   [2013.INIT]
                 </span>
                 <span className="
-                  font-fira text-xs text-cyber-blue
+                  font-mono text-xs text-cyber-blue
                   bg-cyber-blue/10 px-3 py-1 rounded-full
                   border border-cyber-blue/30
                 ">
@@ -573,7 +559,7 @@ const AboutSection = () => {
               }
             `}
             style={{
-              transitionDelay: isVisible.rightPanel ? '600ms' : '0ms'
+              transitionDelay: isVisible.rightPanel ? '300ms' : '0ms'
             }}>
               <div className="flex items-center justify-between mb-4">
                 <span className="
@@ -704,17 +690,17 @@ const AboutSection = () => {
         <div className={`text-center mb-20 transition-all duration-800 ease-out ${isVisible.teamHeader ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <div className="inline-block mb-6">
             <span className="
-              font-fira text-sm text-cyan-400
+              font-mono text-sm text-cyan-400
               bg-cyan-400/10 px-6 py-3 rounded-full
               border border-cyan-400/30
               shadow-lg shadow-cyan-400/20
             ">
-              [EXECUTIVE_TEAM.2025-2026]
+              [AIS_KERNEL_OF.2025-2026]
             </span>
           </div>
           <h2 className="
-            font-orbitron font-bold text-3xl md:text-4xl lg:text-5xl
-            bg-gradient-to-r from-cyber-blue via-cyan-400 to-blue-300
+            font-bold text-3xl md:text-4xl lg:text-5xl
+            bg-gradient-to-r from-cyan-400 via-cyan-500 to-blue-300
             bg-clip-text text-transparent
             mb-6
             filter drop-shadow-lg
@@ -722,7 +708,7 @@ const AboutSection = () => {
           style={{
             textShadow: '0 0 40px rgba(0, 170, 255, 0.4)'
           }}>
-            EXECUTIVE COMMAND STRUCTURE
+            MEET OUR TEAM
           </h2>
           <div className="w-32 h-1 bg-gradient-to-r from-transparent via-cyber-blue to-transparent mx-auto rounded-full"></div>
         </div>
@@ -730,7 +716,7 @@ const AboutSection = () => {
         {/* Enhanced Horizontal Scroll Container */}
         <div className="relative">
           <div className="
-            overflow-x-auto scrollbar-hide
+            relative overflow-hidden
             pb-8
           " 
           ref={teamScrollRef}
@@ -740,14 +726,46 @@ const AboutSection = () => {
           }}>
             <div className="flex space-x-8 min-w-max px-8">
               {[
-                { role: "President", img: "/rim.png", name: "[Rim]", color: "from-red-500 to-pink-500" },
-                { role: "Vice President", img: "/salah.png", name: "[Salah]", color: "from-blue-500 to-cyan-500" },
-                { role: "Treasurer", img: "/zakaria.png", name: "[Zakaria]", color: "from-green-500 to-teal-500" },
-                { role: "General Secretary", img: "/aya.png", name: "[Aya]", color: "from-yellow-500 to-orange-500" },
-                { role: "Head of Media", img: "/lina.png", name: "[Lina]", color: "from-purple-500 to-pink-500" },
-                { role: "Head of Projects", img: "/ali.png", name: "[Ali]", color: "from-indigo-500 to-blue-500" },
-                { role: "Sponsorship Manager", img: "/m1.png", name: "[Hiba]", color: "from-green-500 to-red-500" },
-                { role: "Vice Sponsorship Manager", img: "/m2.png", name: "[Aya]", color: "from-orange-500 to-white-500" }
+                { role: "President", img: "/rim.png", name: "RIME ZOUHAIR", color: "from-red-500 to-pink-500", social: {
+      instagram: "https://instagram.com/reem_kiim",
+      linkedin: "https://linkedin.com/in/Rime Zouhair", 
+      github: "https://github.com/z-r125"
+    }},
+    { role: "Vice President", img: "/salah.png", name: "SALAH-EDDINE E-ZZAIME", color: "from-blue-500 to-cyan-500", social: {
+      instagram: "https://instagram.com/salahzaim666",
+      linkedin: "https://linkedin.com/in/Salah Zaim", 
+      github: "https://github.com/salahzaim330"
+    }},
+    { role: "Treasurer", img: "/zakaria.png", name: "ZAKARIA REBBAH", color: "from-green-500 to-teal-500", social: {
+      instagram: "https://instagram.com/zakaria_rebbah_",
+      linkedin: "https://www.linkedin.com/in/zakaria-rebbah-9bb004264", 
+      github: "https://github.com/Zakaria-reb"
+    }},
+    { role: "General Secretary", img: "/aya.png", name: "AYA SADOQ", color: "from-blue-500 to-cyan-500", social: {
+      instagram: "https://instagram.com/rime_zouhair",
+      linkedin: "https://linkedin.com/in/Aya-sadoq", 
+      github: "https://github.com/ayasadoq"
+    }},
+    { role: "Head of Media", img: "lina.png", name: "LINA BOURDAOUI", color: "from-purple-500 to-pink-500", social: {
+      instagram: "https://instagram.com/lina_bourdaoui",
+      linkedin: "https://linkedin.com/in/Lina-Bourdaoui", 
+      github: "https://github.com/rimezouhair"
+    }},
+    { role: "Head of Projects", img: "ali.png", name: "MOHAMED ALI BOULAAMAIL", color: "from-indigo-500 to-blue-500", social: {
+      instagram: "https://instagram.com/ali_boulaamail",
+      linkedin: "https://linkedin.com/in/Ali-Boulaamail", 
+      github: "https://github.com/xyz6269/"
+    }},
+    { role: "Sponsorship Manager", img: "m1.png", name: "HIBA ELMANSOURI", color: "from-orange-500 to-red-500", social: {
+      instagram: "https://instagram.com/rime_zouhair",
+      linkedin: "https://linkedin.com/in/rime-zouhair", 
+      github: "https://github.com/rimezouhair"
+    }},
+    { role: "Vice Sponsorship Manager", img: "m2.png", name: "AYA TAGHDA", color: "from-yellow-500 to-orange-500", social: {
+      instagram: "https://instagram.com/rime_zouhair",
+      linkedin: "https://linkedin.com/in/rime-zouhair", 
+      github: "https://github.com/rimezouhair"
+    }}
               ].map((member, index) => (
                 <div 
                   key={index} 
@@ -768,10 +786,10 @@ const AboutSection = () => {
                   <div className="
                     relative
                     bg-gradient-to-br from-gray-900/95 to-black/95
-                    border border-cyber-blue/40
+                    border border-cyan-500/40
                     rounded-xl p-8
                     backdrop-blur-lg
-                    shadow-lg shadow-cyber-blue/25
+                    shadow-lg shadow-cyan-500/25
                     group-hover:shadow-2xl group-hover:shadow-cyan-400/40
                     group-hover:border-cyan-400/60
                     transition-all duration-500
@@ -789,8 +807,8 @@ const AboutSection = () => {
                       {/* Outer Ring - Plus grand */}
                       <div className="
                         absolute inset-0 w-48 h-48 mx-auto
-                        border-2 border-cyber-blue/50 rounded-full
-                        animate-ring-rotate
+                        border-2 border-cyan-500/50 rounded-full
+                        animate-spin
                         group-hover:border-cyan-400/70
                         transition-colors duration-300
                       "></div>
@@ -798,8 +816,8 @@ const AboutSection = () => {
                       {/* Middle Ring - Plus grand */}
                       <div className="
                         absolute inset-4 w-40 h-40 mx-auto
-                        border border-cyber-blue/40 rounded-full
-                        animate-spin-reverse
+                        border border-cyan-500/40 rounded-full
+                        animate-spin
                         group-hover:border-cyan-300/60
                         transition-colors duration-300
                       "></div>
@@ -807,8 +825,8 @@ const AboutSection = () => {
                       {/* Inner Ring - Plus grand */}
                       <div className="
                         absolute inset-8 w-32 h-32 mx-auto
-                        border border-cyber-blue/30 rounded-full
-                        animate-ring-rotate
+                        border border-cyan-500/30 rounded-full
+                        animate-spin
                         group-hover:border-cyan-200/50
                         transition-colors duration-300
                       "></div>
@@ -817,11 +835,11 @@ const AboutSection = () => {
                       <div className="
                         relative w-36 h-36 mx-auto
                         rounded-full overflow-hidden
-                        border-3 border-cyber-blue/60
+                        border-3 border-cyan-500/60
                         group-hover:border-cyan-400/80
                         transition-all duration-500
                         group-hover:scale-110
-                        shadow-xl shadow-cyber-blue/40
+                        shadow-xl shadow-cyan-500/40
                         group-hover:shadow-2xl group-hover:shadow-cyan-400/60
                         bg-gradient-to-br from-gray-800/50 to-gray-900/80
                       ">
@@ -946,18 +964,19 @@ const AboutSection = () => {
                       ">
                         {member.name}
                       </div>
+                      <SocialLinks social={member.social} />
                     </div>
                     
                     {/* Enhanced Hover Accent Lines */}
                     <div className="
                       absolute top-4 left-4 w-12 h-0.5
-                      bg-gradient-to-r from-cyber-blue to-transparent
+                      bg-gradient-to-r from-cyan-400 to-transparent
                       opacity-0 group-hover:opacity-100
                       transition-opacity duration-500
                     "></div>
                     <div className="
                       absolute top-4 left-4 w-0.5 h-12
-                      bg-gradient-to-b from-cyber-blue to-transparent
+                      bg-gradient-to-b from-cyan-400 to-transparent
                       opacity-0 group-hover:opacity-100
                       transition-opacity duration-500
                     "></div>
@@ -977,7 +996,7 @@ const AboutSection = () => {
                     {/* Role badge */}
                     <div className="
                       absolute top-3 right-3
-                      font-fira text-sm
+                      font-mono text-sm
                       bg-black/70 text-cyan-400
                       px-3 py-1 rounded-lg
                       opacity-0 group-hover:opacity-100
@@ -1015,17 +1034,6 @@ const AboutSection = () => {
               </svg>
             </button>
             
-            {/* Scroll indicator dots */}
-            <div className="flex space-x-2">
-              {[...Array(8)].map((_, i) => (
-                <div
-                  key={i}
-                  className="w-2 h-2 rounded-full bg-cyber-blue/30 animate-pulse"
-                  style={{animationDelay: `${i * 0.1}s`}}
-                />
-              ))}
-            </div>
-            
             <button 
               className={`
                 flex items-center justify-center
@@ -1048,26 +1056,8 @@ const AboutSection = () => {
           </div>
 
           {/* Enhanced Instructions */}
-          <div className="
-            text-center mt-8 space-y-2
-            font-fira text-xs text-gray-500
-          ">
-            <div className="md:hidden">
-              Swipe or drag to navigate • Tap to focus
-            </div>
-            <div className="hidden md:block">
-              Use arrow keys or drag to navigate • Click to focus
-            </div>
-          </div>
+          
         </div>
-      </div>
-
-      {/* Enhanced Scroll Indicator */}
-      <div className="relative z-10 flex justify-center pb-16">
-        <ScrollIndicator
-          targetSection="activities" // This will scroll to the activities section
-          text="Initialize Next Module\nExplore Our Activities"
-        />
       </div>
 
       {/* CSS for orbital animation */}

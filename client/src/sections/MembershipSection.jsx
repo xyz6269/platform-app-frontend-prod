@@ -108,7 +108,7 @@ const MembershipSection = () => {
                 ? 'translate-y-0 opacity-100'
                 : 'translate-y-6 opacity-0'
             }`}
-            style={{ transitionDelay: visibleElements.has('description') ? '300ms' : '0ms' }}
+            style={{ transitionDelay: visibleElements.has('description') ? '150ms' : '0ms' }}
             ref={el => elementsRef.current[1] = el}
             data-index="description"
           >
@@ -133,7 +133,7 @@ const MembershipSection = () => {
                     : 'translate-y-12 opacity-0'
                 }`}
                 style={{ 
-                  transitionDelay: visibleElements.has(`benefit-${index}`) ? `${600 + index * 150}ms` : '0ms'
+                  transitionDelay: visibleElements.has(`benefit-${index}`) ? `${300 + index * 75}ms` : '0ms'
                 }}
                 ref={el => elementsRef.current[index + 2] = el}
                 data-index={`benefit-${index}`}
@@ -176,7 +176,7 @@ const MembershipSection = () => {
                 ? 'translate-y-0 opacity-100'
                 : 'translate-y-8 opacity-0'
             }`}
-            style={{ transitionDelay: visibleElements.has('cta') ? '1200ms' : '0ms' }}
+            style={{ transitionDelay: visibleElements.has('cta') ? '600ms' : '0ms' }}
             ref={el => elementsRef.current[6] = el}
             data-index="cta"
           >
@@ -190,7 +190,7 @@ const MembershipSection = () => {
                 accelerate your career in technology.
               </p>
               <Link 
-  to="/connexion"
+  to="/soon"
   className="group cursor-pointer"
 >
   <div className="relative bg-gradient-to-r from-purple-500/20 to-cyan-500/20 backdrop-blur-sm border border-purple-400/40 rounded-lg px-8 py-4 group-hover:border-purple-400/60 transition-all duration-300 hover:shadow-lg hover:shadow-purple-400/30 hover:-translate-y-1 hover:scale-105">
@@ -225,7 +225,7 @@ const MembershipSection = () => {
                 ? 'translate-y-0 opacity-100'
                 : 'translate-y-4 opacity-0'
             }`}
-            style={{ transitionDelay: visibleElements.has('status') ? '1400ms' : '0ms' }}
+            style={{ transitionDelay: visibleElements.has('status') ? '700ms' : '0ms' }}
             ref={el => elementsRef.current[7] = el}
             data-index="status"
           >
