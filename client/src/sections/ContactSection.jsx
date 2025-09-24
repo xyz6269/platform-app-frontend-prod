@@ -46,30 +46,12 @@ const ContactSection = () => {
       isClickable: true
     },
     {
-      icon: MessageCircle,
-      label: "WHATSAPP",
-      value: "+212 XX XX XX XX",
-      description: "Chat with us instantly",
-      color: "text-green-500",
-      link: "https://wa.me/212XXXXXXXXX", // Replace with actual WhatsApp number
-      isClickable: true
-    },
-    {
-      icon: Facebook,
-      label: "FACEBOOK",
-      value: "@AppinSciences",
-      description: "Follow our updates",
-      color: "text-blue-600",
-      link: "https://facebook.com/AppinSciences", // Replace with actual Facebook page
-      isClickable: true
-    },
-    {
       icon: Instagram,
       label: "INSTAGRAM", 
       value: "@appinsciences",
       description: "See our visual stories",
       color: "text-pink-500",
-      link: "https://instagram.com/appinsciences", // Replace with actual Instagram
+      link: "https://www.instagram.com/app_in_sciences/", // Replace with actual Instagram
       isClickable: true
     },
     {
@@ -78,7 +60,7 @@ const ContactSection = () => {
       value: "@appinsciences",
       description: "Watch our creative content",
       color: "text-black",
-      link: "https://tiktok.com/@appinsciences", // Replace with actual TikTok
+      link: "https://tiktok.com/@app_in_sciences", // Replace with actual TikTok
       isClickable: true
     },
     {
@@ -87,7 +69,7 @@ const ContactSection = () => {
       value: "AppinSciences ENSA",
       description: "Connect professionally",
       color: "text-blue-500",
-      link: "https://linkedin.com/company/appinsciences-ensa", // Replace with actual LinkedIn
+      link: "https://linkedin.com/in/app-in-sciences-987706239", // Replace with actual LinkedIn
       isClickable: true
     }
   ];
@@ -148,7 +130,7 @@ const ContactSection = () => {
                 ? 'translate-y-0 opacity-100'
                 : 'translate-y-6 opacity-0'
             }`}
-            style={{ transitionDelay: visibleElements.has('description') ? '300ms' : '0ms' }}
+            style={{ transitionDelay: visibleElements.has('description') ? '150ms' : '0ms' }}
             ref={el => elementsRef.current[1] = el}
             data-index="description"
           >
@@ -163,57 +145,69 @@ const ContactSection = () => {
           </div>
 
           {/* Contact Methods Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+          {/* Contact Methods Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16 justify-items-center">
             {contactMethods.map((method, index) => {
               const IconComponent = method.icon;
               return (
                 <div
                   key={index}
-                  className={`group bg-black/40 border border-cyber-blue/20 rounded-xl p-6 backdrop-blur-sm hover:border-blue-400/40 transition-all duration-700 hover:-translate-y-2 hover:shadow-2xl hover:shadow-blue-400/20 transform ${
+                  className={`group relative bg-gradient-to-br from-black/50 to-black/30 border border-cyber-blue/30 rounded-2xl p-8 backdrop-blur-lg hover:border-blue-400/60 transition-all duration-700 hover:-translate-y-3 hover:shadow-2xl hover:shadow-blue-400/30 transform max-w-xs w-full ${
                     visibleElements.has(`contact-${index}`)
                       ? 'translate-y-0 opacity-100'
                       : 'translate-y-12 opacity-0'
-                  } ${method.isClickable ? 'cursor-pointer' : ''}`}
+                  } ${method.isClickable ? 'cursor-pointer hover:bg-gradient-to-br hover:from-blue-500/10 hover:to-cyan-500/10' : ''}`}
                   style={{ 
-                    transitionDelay: visibleElements.has(`contact-${index}`) ? `${600 + index * 150}ms` : '0ms'
+                    transitionDelay: visibleElements.has(`contact-${index}`) ? `${300 + index * 75}ms` : '0ms'
                   }}
                   ref={el => elementsRef.current[index + 2] = el}
                   data-index={`contact-${index}`}
                   onClick={() => handleContactClick(method)}
                 >
                   {/* Icon */}
-                  <div className="text-center mb-4">
-                    <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r from-blue-500/20 to-cyan-500/20 border border-blue-400/30 group-hover:border-blue-400/50 transition-all duration-300 group-hover:scale-110">
+                  <div className="text-center mb-6">
+                    <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-blue-500/20 via-cyan-500/15 to-blue-500/20 border-2 border-blue-400/40 group-hover:border-blue-400/70 transition-all duration-500 group-hover:scale-110 group-hover:rotate-3 shadow-lg shadow-blue-400/20">
                       <IconComponent 
-                        size={28} 
-                        className={`${method.color} group-hover:scale-110 transition-transform duration-300`}
+                        size={32} 
+                        className={`${method.color} group-hover:scale-125 transition-transform duration-500 drop-shadow-lg`}
                       />
                     </div>
                   </div>
 
                   {/* Content */}
                   <div className="text-center">
-                    <h3 className="font-orbitron text-sm font-bold text-blue-400 mb-2 tracking-wider group-hover:text-cyan-400 transition-colors duration-300">
+                    <h3 className="font-orbitron text-base font-bold text-blue-400 mb-3 tracking-wider group-hover:text-cyan-300 transition-colors duration-300">
                       {method.label}
                     </h3>
-                    <p className="font-rajdhani text-white text-sm mb-2 group-hover:text-blue-100 transition-colors duration-300">
+                    <p className="font-rajdhani text-white text-base mb-3 group-hover:text-blue-100 transition-colors duration-300 font-medium">
                       {method.value}
                     </p>
-                    <p className="font-rajdhani text-gray-400 text-xs group-hover:text-gray-300 transition-colors duration-300">
+                    <p className="font-rajdhani text-gray-400 text-sm group-hover:text-gray-300 transition-colors duration-300 leading-relaxed">
                       {method.description}
                     </p>
                   </div>
 
-                  {/* Hover Effects */}
-                  <div className="absolute top-2 left-2 w-6 h-0.5 bg-blue-400 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  <div className="absolute top-2 left-2 w-0.5 h-6 bg-blue-400 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  <div className="absolute bottom-2 right-2 w-6 h-0.5 bg-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  <div className="absolute bottom-2 right-2 w-0.5 h-6 bg-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  {/* Enhanced Hover Effects */}
+                  <div className="absolute top-3 left-3 w-8 h-0.5 bg-gradient-to-r from-blue-400 to-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <div className="absolute top-3 left-3 w-0.5 h-8 bg-gradient-to-b from-blue-400 to-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <div className="absolute bottom-3 right-3 w-8 h-0.5 bg-gradient-to-l from-cyan-400 to-blue-400 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <div className="absolute bottom-3 right-3 w-0.5 h-8 bg-gradient-to-t from-cyan-400 to-blue-400 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  
+                  {/* Floating particles effect */}
+                  <div className="absolute -top-1 -right-1 w-2 h-2 bg-blue-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-ping"></div>
+                  <div className="absolute -bottom-1 -left-1 w-1.5 h-1.5 bg-cyan-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-pulse"></div>
                   
                   {/* Click indicator for clickable items */}
                   {method.isClickable && (
-                    <div className="absolute top-3 right-3 w-2 h-2 bg-green-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-pulse"></div>
+                    <div className="absolute top-4 right-4 flex space-x-1">
+                      <div className="w-1.5 h-1.5 bg-green-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-pulse"></div>
+                      <div className="w-1.5 h-1.5 bg-green-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-pulse" style={{ animationDelay: '0.2s' }}></div>
+                      <div className="w-1.5 h-1.5 bg-green-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-pulse" style={{ animationDelay: '0.4s' }}></div>
+                    </div>
                   )}
+
+                  {/* Background glow effect */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-cyan-500/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10"></div>
                 </div>
               );
             })}
@@ -226,7 +220,7 @@ const ContactSection = () => {
                 ? 'translate-y-0 opacity-100'
                 : 'translate-y-12 opacity-0'
             }`}
-            style={{ transitionDelay: visibleElements.has('map') ? '900ms' : '0ms' }}
+            style={{ transitionDelay: visibleElements.has('map') ? '450ms' : '0ms' }}
             ref={el => elementsRef.current[8] = el}
             data-index="map"
           >
@@ -246,8 +240,7 @@ const ContactSection = () => {
             <div className="relative rounded-2xl overflow-hidden border border-cyber-blue/30 shadow-2xl shadow-blue-400/20 group hover:border-blue-400/50 transition-all duration-700">
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent z-10 pointer-events-none"></div>
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3372.8234567890123!2d-8.5009!3d33.2547!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xdaa2c4c4c4c4c4c4%3A0x1234567890abcdef!2sENSA%20El%20Jadida!5e0!3m2!1sen!2sma!4v1234567890123!5m2!1sen!2sma"
-                width="100%"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3336.5901263986248!2d-8.436686525298946!3d33.25103975961241!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xda91dc4c0413d23%3A0xc8dbb36f4b2d2cbc!2sENSA%20:%20%C3%89cole%20Nationale%20des%20Sciences%20Appliqu%C3%A9es%20El%20Jadida!5e0!3m2!1sfr!2sma!4v1758744554166!5m2!1sfr!2sma"
                 height="400"
                 style={{ border: 0 }}
                 allowFullScreen=""
@@ -274,7 +267,7 @@ const ContactSection = () => {
                 ? 'translate-y-0 opacity-100'
                 : 'translate-y-4 opacity-0'
             }`}
-            style={{ transitionDelay: visibleElements.has('status') ? '1200ms' : '0ms' }}
+            style={{ transitionDelay: visibleElements.has('status') ? '600ms' : '0ms' }}
             ref={el => elementsRef.current[9] = el}
             data-index="status"
           >
@@ -288,28 +281,51 @@ const ContactSection = () => {
         </div>
 
         {/* Back to Top Button */}
-        <div 
-          className={`text-center transform transition-all duration-1000 ${
-            visibleElements.has('back-to-top')
-              ? 'translate-y-0 opacity-100'
-              : 'translate-y-6 opacity-0'
-          }`}
-          style={{ transitionDelay: visibleElements.has('back-to-top') ? '1600ms' : '0ms' }}
-          ref={el => elementsRef.current[10] = el}
-          data-index="back-to-top"
-        >
+        <div className="text-center">
           <div
-            className="inline-flex items-center justify-center gap-4 cursor-pointer p-6 rounded-xl bg-cyber-blue/10 border border-cyber-blue/30 transition-all duration-500 hover:bg-cyber-blue/20 hover:-translate-y-2 hover:shadow-lg hover:shadow-cyber-blue/30 group"
+            className="inline-block cursor-pointer group"
             onClick={handleScrollToTop}
           >
-            <span className="font-orbitron text-lg font-medium tracking-[2px] text-cyber-blue uppercase group-hover:text-cyan-400 transition-colors duration-300">
-              Return to Base
-            </span>
-            <div className="flex flex-col items-center space-y-1">
-              <div className="w-0 h-0 border-l-[8px] border-r-[8px] border-b-[8px] border-l-transparent border-r-transparent border-b-cyber-blue group-hover:border-b-cyan-400 transition-colors duration-300"
-                   style={{ filter: 'drop-shadow(0 0 8px rgba(0, 170, 255, 0.6))' }}></div>
-              <div className="w-0 h-0 border-l-[6px] border-r-[6px] border-b-[6px] border-l-transparent border-r-transparent border-b-cyber-blue/70 group-hover:border-b-cyan-400/70 transition-colors duration-300 transform scale-75"
-                   style={{ filter: 'drop-shadow(0 0 6px rgba(0, 170, 255, 0.4))' }}></div>
+            {/* Outer Glow Ring */}
+            <div className="relative w-24 h-24 mx-auto">
+              {/* Rotating Border */}
+              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-500 via-cyan-400 to-purple-500 opacity-60 group-hover:opacity-100 transition-opacity duration-500 animate-spin-slow"></div>
+              <div className="absolute inset-0.5 rounded-full bg-gradient-to-br from-cyber-dark via-cyber-darker to-cyber-darkest"></div>
+              
+              {/* Inner Circle with Animation */}
+              <div className="absolute inset-2 rounded-full bg-gradient-to-br from-purple-600/20 to-cyan-600/20 border border-purple-400/30 group-hover:border-cyan-400/50 transition-all duration-500 flex items-center justify-center group-hover:scale-110 backdrop-blur-sm">
+                {/* Animated Arrow */}
+                <div className="relative">
+                  <div className="w-0 h-0 border-l-[10px] border-r-[10px] border-b-[14px] border-l-transparent border-r-transparent border-b-white group-hover:border-b-cyan-400 transition-all duration-300 transform group-hover:scale-125 group-hover:-translate-y-1 animate-bounce"
+                       style={{ 
+                         filter: 'drop-shadow(0 0 8px rgba(0, 255, 255, 0.5))',
+                         animationDelay: '0.5s'
+                       }}>
+                  </div>
+                  {/* Secondary arrow for depth */}
+                  <div className="absolute top-2 left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-[6px] border-r-[6px] border-b-[8px] border-l-transparent border-r-transparent border-b-white/60 group-hover:border-b-cyan-400/60 transition-all duration-300"
+                       style={{ filter: 'drop-shadow(0 0 4px rgba(0, 255, 255, 0.3))' }}>
+                  </div>
+                </div>
+                
+                {/* Pulse effect */}
+                <div className="absolute inset-0 rounded-full bg-cyan-400/20 animate-ping opacity-0 group-hover:opacity-100"></div>
+              </div>
+              
+              {/* Orbital dots */}
+              <div className="absolute inset-0 animate-spin-slow">
+                <div className="absolute top-0 left-1/2 w-1 h-1 bg-purple-400 rounded-full transform -translate-x-1/2 -translate-y-1"></div>
+                <div className="absolute bottom-0 left-1/2 w-1 h-1 bg-cyan-400 rounded-full transform -translate-x-1/2 translate-y-1"></div>
+                <div className="absolute left-0 top-1/2 w-1 h-1 bg-blue-400 rounded-full transform -translate-x-1 -translate-y-1/2"></div>
+                <div className="absolute right-0 top-1/2 w-1 h-1 bg-pink-400 rounded-full transform translate-x-1 -translate-y-1/2"></div>
+              </div>
+            </div>
+            
+            {/* Text below */}
+            <div className="mt-4 opacity-0 group-hover:opacity-100 transition-all duration-500 transform group-hover:translate-y-0 translate-y-2">
+              <div className="font-fira text-xs text-purple-400 tracking-wider uppercase bg-purple-400/10 px-3 py-1 rounded-full border border-purple-400/20">
+                [SCROLL_TO_TOP]
+              </div>
             </div>
           </div>
         </div>

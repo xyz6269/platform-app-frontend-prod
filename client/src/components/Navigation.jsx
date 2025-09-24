@@ -27,7 +27,7 @@ const Navigation = ({ showHeaderLogo, activeSection }) => {
   };
 
   const handleJoinRedirect = () => {
-    window.location.href = '/inscription';
+    window.location.href = '/soon';
   };
 
   const toggleMobileMenu = () => {
@@ -204,6 +204,7 @@ const Navigation = ({ showHeaderLogo, activeSection }) => {
       }`}
            style={{ top: '70px' }}>
         
+        {/* Background identique à la nav */}
         <div 
           className={`absolute inset-0 transition-all duration-300 ${
             isMobileMenuOpen ? 'backdrop-blur-md' : ''
@@ -220,7 +221,13 @@ const Navigation = ({ showHeaderLogo, activeSection }) => {
           isMobileMenuOpen 
             ? 'translate-y-0 opacity-100' 
             : '-translate-y-4 opacity-0'
-        }`}>
+        }`}
+        style={{
+          background: 'linear-gradient(135deg, rgba(2, 2, 8, 0.95) 0%, rgba(10, 15, 28, 0.92) 50%, rgba(5, 5, 16, 0.95) 100%)',
+          backdropFilter: 'blur(16px) saturate(180%)',
+          borderBottom: '1px solid rgba(0, 170, 255, 0.15)',
+          boxShadow: '0 4px 32px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(0, 170, 255, 0.08)'
+        }}>
           
           <div className="px-4 py-6">
             <ul className="space-y-2">
@@ -371,6 +378,30 @@ const Navigation = ({ showHeaderLogo, activeSection }) => {
             transform: translateX(0);
             opacity: 1;
           }
+        }
+        
+        .animate-spin-slow {
+          animation: spin 3s linear infinite;
+        }
+        
+        .text-cyber-blue {
+          color: #00aaff;
+        }
+        
+        .border-cyber-blue {
+          border-color: #00aaff;
+        }
+        
+        .bg-cyber-blue {
+          background-color: #00aaff;
+        }
+        
+        .font-orbitron {
+          font-family: 'Orbitron', monospace;
+        }
+        
+        .font-fira {
+          font-family: 'Fira Code', monospace;
         }
       `}</style>
     </nav>
