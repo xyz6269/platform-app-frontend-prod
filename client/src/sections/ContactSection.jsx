@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Mail, Phone, MapPin, MessageCircle, Facebook, Instagram, Music, Linkedin  } from "lucide-react";
+import { SiTiktok } from 'react-icons/si';
 
 const ContactSection = () => {
   const [visibleElements, setVisibleElements] = useState(new Set());
@@ -35,14 +36,16 @@ const ContactSection = () => {
     };
   }, []);
 
+  
+
   const contactMethods = [
     {
       icon: Mail,
       label: "EMAIL",
-      value: "contact@appinsciences.ma",
+      value: "appinscience@gmail.com",
       description: "Send us your inquiries",
       color: "text-red-400",
-      link: "mailto:contact@appinsciences.ma",
+      link: "mailto:appinscience@gmail.com",
       isClickable: true
     },
     {
@@ -55,12 +58,12 @@ const ContactSection = () => {
       isClickable: true
     },
     {
-      icon: Music,
+      icon: SiTiktok,
       label: "TIKTOK",
-      value: "@appinsciences",
+      value: "@app.in.science",
       description: "Watch our creative content",
       color: "text-black",
-      link: "https://tiktok.com/@app_in_sciences", // Replace with actual TikTok
+      link: "https://www.tiktok.com/@app.in.science?_t=ZS-8zZFse4jn1k&_r=1", // Replace with actual TikTok
       isClickable: true
     },
     {

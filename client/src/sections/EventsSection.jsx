@@ -43,12 +43,10 @@ const EventsSection = () => {
       name: "HACKATHON",
       description: "48-hour intensive coding challenge where students build innovative solutions",
       detailedDescription: "Join us for the ultimate coding marathon! Over 48 hours, teams of passionate developers, designers, and innovators will collaborate to build groundbreaking solutions to real-world problems. With mentors from leading tech companies, unlimited coffee, and exciting prizes, this hackathon promises to push the boundaries of creativity and technical excellence.",
-      date: "March 2025",
       type: "COMPETITION",
       color: "from-green-600 to-emerald-600",
       image: "/events/hack.jpg",
       alt: "Hackathon event poster",
-      isOldEvent: false,
       highlights: [
         "48-hour intensive coding marathon",
         "Teams of 4-6 participants",
@@ -70,40 +68,13 @@ const EventsSection = () => {
       ]
     },
     {
-      name: "CyberQuest 3.0",
-      description: "Cybersecurity competition and workshop series",
-      detailedDescription: "CyberQuest 3.0 is our flagship cybersecurity event featuring hands-on workshops, capture-the-flag competitions, and expert talks from industry leaders. Participants will learn about ethical hacking, digital forensics, network security, and emerging cyber threats through practical challenges and real-world scenarios.",
-      date: "June 2025", 
-      type: "CONFERENCE",
-      color: "from-purple-600 to-pink-600",
-      image: "/events/Cq.jpg",
-      alt: "CyberQuest 3.0 event poster",
-      isOldEvent: false,
-      highlights: [
-        "Capture The Flag (CTF) competitions",
-        "Workshops on ethical hacking",
-        "Keynotes from cybersecurity experts",
-        "Networking with security professionals",
-        "Certificates for all participants"
-      ],
-      galleryImages: [
-        {
-          url: "/about_us.jpg",
-          alt: "CTF competition in progress",
-          caption: "Intense CTF competition moments"
-        }
-      ]
-    },
-    {
       name: "Era's Exchange",
       description: "International student and professional exchange program",
       detailedDescription: "Era's Exchange is a unique international program that connects students and professionals across continents. Participants engage in cultural exchange, collaborative projects, and knowledge sharing sessions. This program aims to build global networks and foster cross-cultural understanding in the tech community.",
-      date: "September 2024",
       type: "EXCHANGE",
       color: "from-blue-600 to-cyan-600",
       image: "/events/era.jpg",
       alt: "Era's Exchange event poster",
-      isOldEvent: true,
       highlights: [
         "Connect with international peers",
         "Cultural exchange programs",
@@ -123,12 +94,10 @@ const EventsSection = () => {
       name: "RACKATHON",
       description: "Annual cybersecurity awareness and training summit",
       detailedDescription: "RACKATHON is our premier cybersecurity awareness event combining competitive elements with educational workshops. Participants tackle real-world security challenges while learning about the latest threats, defense strategies, and security tools used by professionals in the field.",
-      date: "December 2024",
       type: "SUMMIT",
       color: "from-red-600 to-orange-600",
       image: "/img/im3.jpg",
       alt: "Cyber Security Summit poster",
-      isOldEvent: true,
       highlights: [
         "Real-world security challenges",
         "Industry expert presentations",
@@ -157,12 +126,10 @@ const EventsSection = () => {
       name: "DevFest",
       description: "Technology talks and networking event with industry experts",
       detailedDescription: "DevFest is our annual developer-focused conference featuring cutting-edge technology talks, live coding sessions, and extensive networking opportunities. Join industry leaders, startup founders, and fellow developers for a day of learning, sharing, and connecting in the ever-evolving world of software development.",
-      date: "February 2024",
       type: "CONFERENCE",
       color: "from-teal-600 to-green-600",
       image: "/events/dv.jpg",
       alt: "DevFest poster",
-      isOldEvent: true,
       highlights: [
         "Tech talks by industry leaders",
         "Live coding demonstrations",
@@ -310,14 +277,7 @@ const EventsSection = () => {
                       </span>
                     </div>
 
-                    {/* Badge "PAST EVENT" - Indicateur d'événements passés */}
-                    {event.isOldEvent && (
-                      <div className="absolute top-4 right-4">
-                        <span className="bg-orange-600/80 text-white text-xs px-2 py-1 rounded-full font-semibold backdrop-blur-sm border border-orange-400/40">
-                          PAST EVENT
-                        </span>
-                      </div>
-                    )}
+                    
 
                     {/* Click to view indicator */}
                     <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -333,9 +293,6 @@ const EventsSection = () => {
                   {/* Content */}
                   <div className="p-4">
                     <div className="mb-2">
-                      <div className={`text-sm font-fira mb-1 ${event.isOldEvent ? 'text-orange-400' : 'text-cyber-blue'}`}>
-                        {event.date}
-                      </div>
                     </div>
                     
                     <h3 className="font-orbitron text-lg font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors duration-300">
