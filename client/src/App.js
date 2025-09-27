@@ -160,6 +160,7 @@ function App() {
 
   return (
     <div className="text-center relative bg-gradient-to-br from-cyber-dark via-cyber-darker to-cyber-darkest font-rajdhani text-white overflow-x-hidden">
+      
       <CodeBackground />
       <Navigation showHeaderLogo={showHeaderLogo} activeSection={activeSection} />
       

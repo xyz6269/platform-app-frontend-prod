@@ -728,12 +728,12 @@ const AboutSection = () => {
               {[
                 { role: "President", img: "/rim.png", name: "RIME ZOUHAIR", color: "from-red-500 to-pink-500", social: {
       instagram: "https://instagram.com/reem_kiim",
-      linkedin: "https://linkedin.com/in/Rime Zouhair", 
+      linkedin: "https://linkedin.com/search/results/people/?q=Rime%20Zouhair", 
       github: "https://github.com/z-r125"
     }},
     { role: "Vice President", img: "/salah.png", name: "SALAH-EDDINE E-ZZAIME", color: "from-blue-500 to-cyan-500", social: {
       instagram: "https://instagram.com/salahzaim666",
-      linkedin: "https://linkedin.com/in/Salah Zaim", 
+      linkedin: "https://www.linkedin.com/in/salah-eddine-e-zzaime-2a0342268/", 
       github: "https://github.com/salahzaim330"
     }},
     { role: "Treasurer", img: "/zakaria.png", name: "ZAKARIA REBBAH", color: "from-green-500 to-teal-500", social: {
@@ -743,27 +743,27 @@ const AboutSection = () => {
     }},
     { role: "General Secretary", img: "/aya.png", name: "AYA SADOQ", color: "from-blue-500 to-cyan-500", social: {
       instagram: "https://instagram.com/rime_zouhair",
-      linkedin: "https://linkedin.com/in/Aya-sadoq", 
+      linkedin: "https://linkedin.com/search/results/people/?q=Aya%20Sadoq", 
       github: "https://github.com/ayasadoq"
     }},
     { role: "Head of Media", img: "lina.png", name: "LINA BOURDAOUI", color: "from-purple-500 to-pink-500", social: {
       instagram: "https://instagram.com/lina_bourdaoui",
-      linkedin: "https://linkedin.com/in/Lina-Bourdaoui", 
+      linkedin: "https://linkedin.com/search/results/people/?q=Lina%20Bourdaoui", 
       github: "https://github.com/rimezouhair"
     }},
     { role: "Head of Projects", img: "ali.png", name: "MOHAMED ALI BOULAAMAIL", color: "from-indigo-500 to-blue-500", social: {
       instagram: "https://instagram.com/ali_boulaamail",
-      linkedin: "https://linkedin.com/in/Ali-Boulaamail", 
+      linkedin: "https://http://linkedin.com/in/mohamed-ali-boulaamail", 
       github: "https://github.com/xyz6269/"
     }},
     { role: "Sponsorship Manager", img: "m1.png", name: "HIBA ELMANSOURI", color: "from-orange-500 to-red-500", social: {
-      instagram: "https://instagram.com/rime_zouhair",
-      linkedin: "https://linkedin.com/in/rime-zouhair", 
+      instagram: "https://www.instagram.com/hi555_ba?igsh=MTF2OTdoZDVzN3Rxcg== ",
+      linkedin: "https://www.linkedin.com/in/elmansouri-hiba-342a91288?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app", 
       github: "https://github.com/rimezouhair"
     }},
     { role: "Vice Sponsorship Manager", img: "m2.png", name: "AYA TAGHDA", color: "from-yellow-500 to-orange-500", social: {
       instagram: "https://instagram.com/rime_zouhair",
-      linkedin: "https://linkedin.com/in/rime-zouhair", 
+      linkedin: "https://linkedin.com/search/results/people/?q=Rime%20Zouhair", 
       github: "https://github.com/rimezouhair"
     }}
               ].map((member, index) => (

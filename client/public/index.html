@@ -4,21 +4,99 @@
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/ais_web.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
+    <meta name="theme-color" content="#00aaff" />
+    
+    <!-- Basic SEO -->
+    <title>AppInSciences - Innovation Hub | ENSA El Jadida</title>
+    <meta name="description" content="Join AppInSciences, the leading technology and innovation club at ENSA El Jadida. Empowering engineering minds through hackathons, workshops, and collaborative projects since 2013." />
+    <meta name="keywords" content="AppInSciences, ENSA El Jadida, innovation, technology, hackathon, engineering, students, Morocco, programming, cybersecurity" />
+    <meta name="author" content="AppInSciences Team" />
+    
+    <!-- Open Graph (for WhatsApp, Facebook, LinkedIn, etc.) -->
+    <meta property="og:title" content="AppInSciences - Innovation Hub | ENSA El Jadida" />
+    <meta property="og:description" content="Join AppInSciences, the leading technology and innovation club at ENSA El Jadida. Empowering engineering minds through hackathons, workshops, and collaborative projects since 2013." />
+    <meta property="og:image" content="%PUBLIC_URL%/ais_web.png" />
+    <meta property="og:url" content="https://app-in-science.cc/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="AppInSciences" />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- Twitter Card (for Twitter/X) -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="AppInSciences - Innovation Hub | ENSA El Jadida" />
+    <meta name="twitter:description" content="Join AppInSciences, the leading technology and innovation club at ENSA El Jadida. Empowering engineering minds through hackathons, workshops, and collaborative projects." />
+    <meta name="twitter:image" content="%PUBLIC_URL%/ais_web.png" />
+    <meta name="twitter:site" content="@appinsciences" />
+    <meta name="twitter:creator" content="@appinsciences" />
+    
+    <!-- Additional SEO Meta Tags -->
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="English" />
+    <meta name="revisit-after" content="7 days" />
+    <meta name="distribution" content="global" />
+    <meta name="rating" content="general" />
+    
+    <!-- Geo Tags for Morocco/El Jadida -->
+    <meta name="geo.region" content="MA-06" />
+    <meta name="geo.placename" content="El Jadida" />
+    <meta name="geo.position" content="33.2316;-8.5007" />
+    <meta name="ICBM" content="33.2316, -8.5007" />
+    
+    <!-- Favicon and App Icons - Using existing files -->
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cdn.tailwindcss.com" />
+    
+    <!-- DNS Prefetch for external resources -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="//fonts.gstatic.com" />
+    
+    <!-- Google Fonts with display=swap for performance -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
     
     <!-- Tailwind CSS via CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Structured Data (JSON-LD) for better SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "AppInSciences",
+      "alternateName": "AIS",
+      "url": "https://app-in-science.cc/",
+      "logo": "%PUBLIC_URL%/ais_web.png",
+      "description": "Leading technology and innovation club at ENSA El Jadida, empowering engineering minds through hackathons, workshops, and collaborative projects since 2013.",
+      "foundingDate": "2013",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "ENSA El Jadida",
+        "addressLocality": "El Jadida",
+        "addressRegion": "Casablanca-Settat",
+        "addressCountry": "Morocco"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+212-xxx-xxx-xxx",
+        "contactType": "Customer Service",
+        "email": "appinscience@gmail.com"
+      },
+      "sameAs": [
+        "https://www.instagram.com/appinsciences",
+        "https://www.tiktok.com/@app.in.science",
+        "https://www.linkedin.com/company/appinsciences-ensa"
+      ],
+      "memberOf": {
+        "@type": "EducationalOrganization",
+        "name": "ENSA El Jadida",
+        "url": "http://www.ensa-eljadida.ac.ma/"
+      }
+    }
+    </script>
     
     <!-- Tailwind Configuration -->
     <script>
@@ -83,11 +161,28 @@
         },
       }
     </script>
-
-    <title>AIS Web</title>
   </head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <noscript>
+      <div style="text-align: center; padding: 20px; background: #020208; color: #00aaff; font-family: Arial, sans-serif;">
+        <h1>AppInSciences</h1>
+        <p>You need to enable JavaScript to run this app.</p>
+        <p>Please enable JavaScript in your browser settings to access the full AppInSciences experience.</p>
+      </div>
+    </noscript>
     <div id="root"></div>
+    
+    <!-- Performance monitoring script (optional) -->
+    <script>
+      // Simple performance monitoring
+      window.addEventListener('load', function() {
+        setTimeout(function() {
+          const perfData = performance.getEntriesByType('navigation')[0];
+          if (perfData && perfData.loadEventEnd > 0) {
+            console.log('Page loaded in:', Math.round(perfData.loadEventEnd - perfData.navigationStart), 'ms');
+          }
+        }, 0);
+      });
+    </script>
   </body>
 </html>
